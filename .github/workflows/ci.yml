@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+
+jobs:
+  test:
+    name: test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+    steps:
+      - name: pull repo
+        uses: actions/checkout@v4
+      - name: setup java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: "17"
+          cache: gradle
+      - name: setup flutter
+        uses: subosito/flutter-action@v2
+      - name: build apk
+        run: flutter build apk
+      - name: push oci
+        run: oras push -a "org.opencontainers.image.ref.name=${{ github.ref }}" ghcr.io/${{ github.repository }}:${{ github.ref }} app-release.apk:application/vnd.android.package-archive
