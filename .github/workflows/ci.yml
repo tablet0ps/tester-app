@@ -27,4 +27,4 @@ jobs:
       - name: setup oras
         uses: oras-project/setup-oras@v1
       - name: push oci
-        run: oras push -a "org.opencontainers.image.ref.name=${{ github.sha }}" ghcr.io/${{ github.repository }}:${{ github.sha }} app-release.apk:application/vnd.android.package-archive
+        run: oras push -a "org.opencontainers.image.ref.name=${{ github.sha }}.apk" ghcr.io/${{ github.repository }}:${{ github.sha }} build/app/outputs/apk/app-release.apk:application/vnd.android.package-archive
