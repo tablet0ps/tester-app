@@ -27,6 +27,6 @@ jobs:
       - name: setup oras
         uses: oras-project/setup-oras@v1
       - name: login to ghcr
-        run: oras login ghcr.io --password $GITHUB_TOKEN -u github
+        run: oras login -u github -p $GITHUB_TOKEN ghcr.io
       - name: push oci
         run: oras push -a "org.opencontainers.image.ref.name=${{ github.sha }}.apk" ghcr.io/${{ github.repository }}:${{ github.sha }} build/app/outputs/flutter-apk/app-release.apk:application/vnd.android.package-archive
