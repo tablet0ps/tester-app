@@ -29,4 +29,4 @@ jobs:
       - name: login to ghcr
         run: oras login -u github -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
       - name: push oci
-        run: oras push -a "org.opencontainers.image.ref.name=${{ github.sha }}.apk" ghcr.io/${{ github.repository }}:${{ github.sha }} build/app/outputs/flutter-apk/app-release.apk:application/vnd.android.package-archive
+        run: oras push -a "org.opencontainers.image.title=${{ github.sha }}.apk" ghcr.io/${{ github.repository }}:${{ github.sha }} build/app/outputs/flutter-apk/app-release.apk:application/vnd.android.package-archive
